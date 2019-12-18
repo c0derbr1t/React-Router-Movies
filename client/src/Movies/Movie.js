@@ -5,12 +5,12 @@ import MovieCard from './MovieCard';
 
 const Movie = (props) => {
   const [movie, setMovie] = useState();
+
   const {movieID} = useParams();
  
   useEffect(() => {
     // change ^^^ that line and grab the id from the URL
     // You will NEED to add a dependency array to this effect hook
-
        axios
         .get(`http://localhost:5000/api/movies/${movieID}`)
         .then(response => {
@@ -20,7 +20,7 @@ const Movie = (props) => {
           console.error(error);
         });
 
-  },[movieID]);
+  }, [movieID]);
   
   // Uncomment this only when you have moved on to the stretch goals
   // const saveMovie = () => {
@@ -32,7 +32,6 @@ const Movie = (props) => {
     return <div>Loading movie information...</div>;
   }
 
-  const { id, title, director, metascore, stars } = movie;
   return (
     <MovieCard movie={movie} />
   );
