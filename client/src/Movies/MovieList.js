@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch, Route } from 'react-router-dom';
+import MovieCard from './MovieCard';
 
 
 const MovieList = props => {
@@ -31,9 +32,10 @@ const MovieList = props => {
 
 function MovieDetails({ movie }) {
   const { id, title, director, metascore, stars } = movie;
+  const match = useRouteMatch();
   return (
     <div className="movie-card">
-      <Link to={`/movies/${id}`}>
+      <Link to={`$url}/{id}`}>
         <h2>{title}</h2>
         <div className="movie-director">
           Director: <em>{director}</em>
@@ -48,7 +50,10 @@ function MovieDetails({ movie }) {
             {star}
           </div>
         ))}
-      </Link>   
+      </Link> 
+      <Route path={`${path}/{id}`}>
+        <MovieCard />
+      </Route>
     </div>
   );
 }
